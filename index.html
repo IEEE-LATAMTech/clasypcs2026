@@ -1,112 +1,58 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CLASP&amp;CS 2026 – Próximamente</title>
-  <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="./src/assets/favicon.png"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>IEEE CLASYPCS 2026 - San José, Costa Rica</title>
 
-    body {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #003087 0%, #0066cc 60%, #00aaff 100%);
-      font-family: 'Segoe UI', Arial, sans-serif;
-      color: #ffffff;
-      text-align: center;
-      padding: 2rem;
-    }
+    <!-- Primary Meta Tags -->
+    <meta
+      name="title"
+      content="IEEE CLASYPCS 2026 - San José, Costa Rica"
+    />
+    <meta
+      name="description"
+      content="Join us at IEEE CLASYPCS 2026 in San José, Costa Rica (Sep 21-22). Apply for scholarships and connect with future changemakers in technology and leadership."
+    />
 
-    .container {
-      max-width: 680px;
-    }
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="" />
+    <meta property="og:title" content="IEEE CLASYPCS 2026 - San José, Costa Rica" />
+    <meta
+      property="og:description"
+      content="Join us at IEEE CLASYPCS 2026 in San José, Costa Rica (Sep 21-22). Apply for scholarships and connect with future changemakers in technology and leadership."
+    />
+    <meta property="og:image" content="og-image-clasypcs.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="IEEE CLASYPCS 2026 - Conference in San José, Costa Rica" />
 
-    .logo {
-      margin-bottom: 2rem;
-    }
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="" />
+    <meta name="twitter:title" content="IEEE CLASYPCS 2026 - San José, Costa Rica" />
+    <meta
+      name="twitter:description"
+      content="Join us at IEEE CLASYPCS 2026 in San José, Costa Rica (Sep 21-22). Apply for scholarships and connect with future changemakers."
+    />
+    <meta name="twitter:image" content="og-image-clasypcs.png" />
 
-    .logo img {
-      height: 80px;
-      filter: brightness(0) invert(1);
-    }
-
-    h1 {
-      font-size: clamp(2rem, 6vw, 3.5rem);
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      line-height: 1.1;
-      margin-bottom: 0.5rem;
-    }
-
-    h1 span {
-      display: block;
-      font-size: clamp(1.1rem, 3vw, 1.5rem);
-      font-weight: 400;
-      opacity: 0.85;
-      margin-top: 0.3rem;
-    }
-
-    .divider {
-      width: 60px;
-      height: 4px;
-      background: rgba(255, 255, 255, 0.6);
-      border-radius: 2px;
-      margin: 1.5rem auto;
-    }
-
-    .message {
-      font-size: clamp(1.1rem, 3vw, 1.4rem);
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-    }
-
-    .sub-message {
-      font-size: clamp(0.9rem, 2vw, 1.05rem);
-      opacity: 0.8;
-      line-height: 1.6;
-    }
-
-    .badge {
-      display: inline-block;
-      margin-top: 2rem;
-      padding: 0.4rem 1rem;
-      border: 2px solid rgba(255, 255, 255, 0.5);
-      border-radius: 2rem;
-      font-size: 0.85rem;
-      letter-spacing: 0.05em;
-      opacity: 0.75;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="logo" aria-hidden="true">
-      <svg xmlns="http://www.w3.org/2000/svg" width="240" height="60" viewBox="0 0 240 60" aria-hidden="true" focusable="false">
-        <text x="50%" y="30" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="26" font-weight="700" fill="white">IEEE</text>
-        <text x="50%" y="54" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="14" font-weight="400" fill="white" opacity="0.85">LATAMTech</text>
-      </svg>
-    </div>
-
-    <h1>
-      CLASP&amp;CS 2026
-      <span>Latin American Symposium on<br>Programming and Computer Science</span>
-    </h1>
-
-    <div class="divider"></div>
-
-    <p class="message">🚧 Próximamente más información 🚧</p>
-    <p class="sub-message">
-      Estamos preparando el sitio oficial del congreso.<br>
-      ¡Vuelve pronto para conocer todos los detalles!
-    </p>
-
-    <div class="badge">clasypcs2026.ieee-latamtech.org</div>
-  </div>
-</body>
+    <!-- Additional SEO -->
+    <meta name="keywords" content="IEEE, CLASYPCS, 2026, San José, Costa Rica, technology, conference, scholarship, students, young professionals" />
+    <meta name="author" content="IEEE CLASYPCS 2026" />
+    <link rel="canonical" href="" />
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
