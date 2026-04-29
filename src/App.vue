@@ -11,7 +11,6 @@ import Community from "./components/Community.vue";
 import Contact from "./components/Contact.vue";
 import FAQ from "./components/FAQ.vue";
 import Footer from "./components/Footer.vue";
-import Speakers from "./components/Speakers.vue";
 import Pricing from "./components/Pricing.vue";
 import DistinguisedGuest from "./components/DistinguisedGuest.vue";
 //import AboutUs from "./views/AboutUs.vue";
@@ -29,7 +28,6 @@ import DistinguisedGuest from "./components/DistinguisedGuest.vue";
     <Hero />
     <Benefits />
     <DistinguisedGuest/>
-    <Speakers />
     <Sponsors />
     <Features />
     <Community />

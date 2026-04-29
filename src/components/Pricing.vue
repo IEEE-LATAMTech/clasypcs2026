@@ -1,323 +1,141 @@
 <script setup lang="ts">
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-
-import { Star, Zap } from "lucide-vue-next";
-
-enum PopularPlan {
-  NO = 0,
-  YES = 1,
+interface PricingRow {
+  category: string;
+  csMember: string;
+  ieeeMember: string;
+  nonMember: string;
+  group?: boolean;
+  phase: "early" | "regular" | "late";
 }
 
-interface PlanProps {
-  title: string;
-  popular: PopularPlan;
-  price: number;
-  description: string;
-  buttonText: string;
-  benefitList: string[];
-  badge?: string;
-}
-
-const plans: PlanProps[] = [
-  // Student Row
-  {
-    title: "Student CS Member",
-    popular: 1,
-    price: 100,
-    description: "For current Computer Society student members with valid membership.",
-    buttonText: "Register as CS Student",
-    badge: "Best Value",
-    benefitList: [
-      "Computer Society member discount",
-      "Conference access",
-      "Student networking sessions",
-      "Digital certificate",
-      "Welcome package",
-      "CS exclusive workshops",
-    ],
-  },
-  {
-    title: "Student IEEE Member", 
-    popular: 0,
-    price: 150,
-    description: "For current IEEE student members (non-CS) with valid membership.",
-    buttonText: "Register as IEEE Student",
-    benefitList: [
-      "IEEE member discount",
-      "Conference access", 
-      "Student networking sessions",
-      "Digital certificate",
-      "Welcome package",
-      "IEEE member resources",
-    ],
-  },
-  {
-    title: "Student Non-Member",
-    popular: 0,
-    price: 250,
-    description: "For students who are not IEEE or Computer Society members.",
-    buttonText: "Register as Student",
-    benefitList: [
-      "Conference access",
-      "Student networking sessions", 
-      "Digital certificate",
-      "Welcome package",
-      "Access to all sessions",
-      "Membership information booth",
-    ],
-  },
-  // Professional Row  
-  {
-    title: "Professional CS Member",
-    popular: 0,
-    price: 180,
-    description: "For current Computer Society professional members with valid membership.",
-    buttonText: "Register as CS Professional",
-    badge: "",
-    benefitList: [
-      "Computer Society member discount",
-      "Full conference access",
-      "Professional networking dinner",
-      "Premium certificate",
-      "Professional welcome kit",
-      "CS exclusive content",
-      "Industry connections",
-    ],
-  },
-  {
-    title: "Professional IEEE Member",
-    popular: 0, 
-    price: 230,
-    description: "For current IEEE professional members (non-CS) with valid membership.",
-    buttonText: "Register as IEEE Professional",
-    benefitList: [
-      "IEEE member discount",
-      "Full conference access",
-      "Professional networking dinner", 
-      "Premium certificate",
-      "Professional welcome kit",
-      "IEEE member benefits",
-      "Industry connections",
-    ],
-  },
-  {
-    title: "Professional Non-Member",
-    popular: 0,
-    price: 330,
-    description: "For professionals who are not IEEE or Computer Society members.",
-    buttonText: "Register as Professional", 
-    benefitList: [
-      "Full conference access",
-      "Professional networking dinner",
-      "Premium certificate", 
-      "Professional welcome kit",
-      "Access to all sessions",
-      "Membership information booth",
-      "Industry connections",
-    ],
-  },
+const rows: PricingRow[] = [
+  { category: "Student – Early Bird", csMember: "$90", ieeeMember: "$140", nonMember: "$240", phase: "early" },
+  { category: "Professional – Early Bird", csMember: "$150", ieeeMember: "$200", nonMember: "$300", phase: "early" },
+  { category: "Group (5+) – Student (Early Bird)", csMember: "$80", ieeeMember: "$120", nonMember: "$210", group: true, phase: "early" },
+  { category: "Group (5+) – Professional (Early Bird)", csMember: "$140", ieeeMember: "$180", nonMember: "$270", group: true, phase: "early" },
+  { category: "Student – Regular", csMember: "$100", ieeeMember: "$150", nonMember: "$250", phase: "regular" },
+  { category: "Professional – Regular", csMember: "$180", ieeeMember: "$230", nonMember: "$330", phase: "regular" },
+  { category: "Group (5+) – Student (Regular)", csMember: "$90", ieeeMember: "$130", nonMember: "$220", group: true, phase: "regular" },
+  { category: "Group (5+) – Professional (Regular)", csMember: "$170", ieeeMember: "$210", nonMember: "$300", group: true, phase: "regular" },
+  { category: "Student – Late", csMember: "$120", ieeeMember: "$170", nonMember: "$270", phase: "late" },
+  { category: "Professional – Late", csMember: "$210", ieeeMember: "$260", nonMember: "$360", phase: "late" },
+  { category: "Group (5+) – Student (Late)", csMember: "$100", ieeeMember: "$140", nonMember: "$230", group: true, phase: "late" },
+  { category: "Group (5+) – Professional (Late)", csMember: "$190", ieeeMember: "$230", nonMember: "$320", group: true, phase: "late" },
 ];
+
+const deadlines = [
+  { label: "Early Bird", period: "Until May 31st", color: "bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20" },
+  { label: "Regular", period: "June 1 – July 31", color: "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20" },
+  { label: "Late", period: "August 1 – August 20", color: "bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20" },
+];
+
+const phaseLabel: Record<string, string> = {
+  early: "Early Bird",
+  regular: "Regular",
+  late: "Late",
+};
+
+const phaseClass: Record<string, string> = {
+  early: "bg-green-500/5 dark:bg-green-500/5",
+  regular: "bg-blue-500/5 dark:bg-blue-500/5",
+  late: "bg-orange-500/5 dark:bg-orange-500/5",
+};
 </script>
 
 <template>
   <section id="pricing" class="container py-10 sm:py-14">
     <!-- Header -->
     <div class="text-center mb-8">
-      <h2 class="text-lg text-primary text-center mb-2 tracking-wider">
-        Pricing
-      </h2>
-      
+      <h2 class="text-lg text-primary text-center mb-2 tracking-wider">Pricing</h2>
       <h2 class="text-3xl md:text-4xl text-center font-bold mb-3">
-        Conference 
+        Conference
         <span class="text-transparent bg-gradient-to-r from-[#D247BF] to-primary bg-clip-text">
           Registration
         </span>
       </h2>
-      
-      <p class="md:w-2/3 mx-auto text-base text-center text-muted-foreground mb-2">
-        Choose your registration category based on your IEEE membership status. CS and IEEE members receive exclusive discounts.
+      <p class="md:w-2/3 mx-auto text-base text-center text-muted-foreground">
+        Choose your registration category based on your IEEE membership status and registration phase. All prices in USD per person.
       </p>
-      <p class="text-sm font-semibold text-primary">🗓 Registration opens April 20th, 2026.</p>
+    </div>
+
+    <!-- Registration Deadlines -->
+    <div class="flex flex-wrap justify-center gap-4 mb-8">
+      <div
+        v-for="d in deadlines"
+        :key="d.label"
+        :class="`flex items-center gap-2 px-4 py-2 rounded-full border ${d.color} text-sm font-medium`"
+      >
+        <span class="font-bold">{{ d.label }}:</span>
+        <span>{{ d.period }}</span>
+      </div>
     </div>
 
     <!-- Scholarship Banner -->
     <div class="mb-8">
       <div class="max-w-4xl mx-auto bg-gradient-to-r from-[#D247BF]/10 to-primary/10 rounded-xl border border-primary/20 p-5 text-center">
         <h3 class="text-xl font-bold mb-2 flex items-center justify-center gap-2">
-          🎓 <span class="text-transparent bg-gradient-to-r from-[#D247BF] to-primary bg-clip-text">Scholarships Available!</span>
+          🎓
+          <span class="text-transparent bg-gradient-to-r from-[#D247BF] to-primary bg-clip-text">
+            Scholarships Available!
+          </span>
         </h3>
         <p class="text-muted-foreground">
           Are you an outstanding Computer Society member? Apply for a scholarship and join CLASYPCS 2026 as a recognition of your commitment and contributions to the CS community.
-          <br><span class="text-sm font-medium text-primary">Scholarships open April 20th, 2026.</span>
         </p>
       </div>
     </div>
 
-    <!-- Pricing Cards -->
-    <div class="space-y-8">
-      <!-- Student Section -->
-      <div>
-        <h3 class="text-xl font-bold text-center mb-5 text-primary">
-           Student Pricing
-        </h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
-          <Card
-            v-for="plan in plans.slice(0, 3)"
-            :key="plan.title"
-            :class="{
-              'relative border-2 border-primary shadow-2xl shadow-primary/25 lg:scale-105': plan.popular === PopularPlan.YES,
-              'border border-border': plan.popular === PopularPlan.NO,
-            }"
-            class="flex flex-col transition-all duration-300 hover:shadow-xl hover:scale-105 hover:-translate-y-2 group h-full cursor-pointer"
-          >
-            <!-- Badge -->
-            <div 
-              v-if="plan.badge" 
-              class="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10"
+    <!-- Pricing Table -->
+    <div class="max-w-5xl mx-auto overflow-x-auto rounded-xl border border-border shadow-sm">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-muted/80 dark:bg-muted/40">
+            <th class="text-left px-4 py-3 font-semibold">Category</th>
+            <th class="text-center px-4 py-3 font-semibold text-primary">CS Member</th>
+            <th class="text-center px-4 py-3 font-semibold">IEEE Member (non-CS)</th>
+            <th class="text-center px-4 py-3 font-semibold text-muted-foreground">Non-Member</th>
+          </tr>
+        </thead>
+        <tbody>
+          <template v-for="(row, index) in rows" :key="row.category">
+            <!-- Phase header row -->
+            <tr
+              v-if="index === 0 || rows[index - 1].phase !== row.phase"
+              class="border-t border-border"
             >
-              <div 
-                :class="{
-                  'bg-gradient-to-r from-[#D247BF] to-primary text-white': plan.popular === PopularPlan.YES,
-                  'bg-gradient-to-r from-green-500 to-green-600 text-white': plan.badge === 'Best Value',
-                }"
-                class="px-4 py-2 rounded-full text-xs font-semibold flex items-center gap-2 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg"
-              >
-                <Star class="w-3 h-3 fill-current" />
-                {{ plan.badge }}
-              </div>
-            </div>
-
-            <CardHeader class="text-center pb-6" :class="{ 'pt-8': plan.badge }">
-              <CardTitle class="text-xl font-bold mb-3">
-                {{ plan.title }}
-              </CardTitle>
-              
-              <CardDescription class="text-sm leading-relaxed mb-6">
-                {{ plan.description }}
-              </CardDescription>
-              
-              <div class="space-y-2">
-                <div class="flex items-center justify-center gap-2 transition-all duration-300 group-hover:scale-110">
-                  <span class="text-3xl font-bold">${{ plan.price }}</span>
-                  <div class="text-left">
-                    <div class="text-xs text-muted-foreground">USD</div>
-                    <div class="text-xs text-muted-foreground">per person</div>
-                  </div>
-                </div>
-                <p class="text-xs text-muted-foreground">Conference registration</p>
-              </div>
-            </CardHeader>
-
-            <CardFooter class="px-6 pb-6">
-              <Button
-                as-child
-                :class="{
-                  'w-full bg-gradient-to-r from-[#D247BF] to-primary hover:opacity-90 text-white font-semibold shadow-lg': plan.popular === PopularPlan.YES,
-                  'w-full': plan.popular === PopularPlan.NO,
-                }"
-                :variant="plan.popular === PopularPlan.NO ? 'outline' : 'default'"
-                class="text-sm"
-              >
-                <a href="#registration" class="flex items-center justify-center w-full transition-all duration-200 hover:scale-105">
-                  <Zap v-if="plan.popular === PopularPlan.YES" class="w-4 h-4 mr-2" />
-                  {{ plan.buttonText }}
-                </a>
-              </Button>
-            </CardFooter>
-          </Card>
-        </div>
-      </div>
-
-      <!-- Professional Section -->
-      <div>
-        <h3 class="text-xl font-bold text-center mb-5 text-primary">
-           Professional Pricing
-        </h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
-          <Card
-            v-for="plan in plans.slice(3, 6)"
-            :key="plan.title"
-            :class="{
-              'relative border-2 border-primary shadow-2xl shadow-primary/25 lg:scale-105': plan.popular === PopularPlan.YES,
-              'border border-border': plan.popular === PopularPlan.NO,
-            }"
-            class="flex flex-col transition-all duration-300 hover:shadow-xl hover:scale-105 hover:-translate-y-2 group h-full cursor-pointer"
-          >
-            <!-- Badge -->
-            <div 
-              v-if="plan.badge" 
-              class="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10"
+              <td colspan="4" :class="`px-4 py-2 text-xs font-bold uppercase tracking-wider text-center border-b border-border ${phaseClass[row.phase]}`">
+                {{ phaseLabel[row.phase] }} Pricing
+              </td>
+            </tr>
+            <!-- Data row -->
+            <tr
+              :class="[
+                'border-t border-border/50 transition-colors hover:bg-muted/40',
+                row.group ? 'italic text-muted-foreground' : '',
+              ]"
             >
-              <div 
-                :class="{
-                  'bg-gradient-to-r from-[#D247BF] to-primary text-white': plan.popular === PopularPlan.YES,
-                  'bg-gradient-to-r from-green-500 to-green-600 text-white': plan.badge === 'Best Value',
-                }"
-                class="px-4 py-2 rounded-full text-xs font-semibold flex items-center gap-2 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg"
-              >
-                <Star class="w-3 h-3 fill-current" />
-                {{ plan.badge }}
-              </div>
-            </div>
-
-            <CardHeader class="text-center pb-6" :class="{ 'pt-8': plan.badge }">
-              <CardTitle class="text-xl font-bold mb-3">
-                {{ plan.title }}
-              </CardTitle>
-              
-              <CardDescription class="text-sm leading-relaxed mb-6">
-                {{ plan.description }}
-              </CardDescription>
-              
-              <div class="space-y-2">
-                <div class="flex items-center justify-center gap-2 transition-all duration-300 group-hover:scale-110">
-                  <span class="text-3xl font-bold">${{ plan.price }}</span>
-                  <div class="text-left">
-                    <div class="text-xs text-muted-foreground">USD</div>
-                    <div class="text-xs text-muted-foreground">per person</div>
-                  </div>
-                </div>
-                <p class="text-xs text-muted-foreground">Conference registration</p>
-              </div>
-            </CardHeader>
-
-            <CardFooter class="px-6 pb-6">
-              <Button
-                as-child
-                :class="{
-                  'w-full bg-gradient-to-r from-[#D247BF] to-primary hover:opacity-90 text-white font-semibold shadow-lg': plan.popular === PopularPlan.YES,
-                  'w-full': plan.popular === PopularPlan.NO,
-                }"
-                :variant="plan.popular === PopularPlan.NO ? 'outline' : 'default'"
-                class="text-sm"
-              >
-                <a href="#registration" class="flex items-center justify-center w-full transition-all duration-200 hover:scale-105">
-                  <Zap v-if="plan.popular === PopularPlan.YES" class="w-4 h-4 mr-2" />
-                  {{ plan.buttonText }}
-                </a>
-              </Button>
-            </CardFooter>
-          </Card>
-        </div>
-      </div>
+              <td class="px-4 py-3">{{ row.category }}</td>
+              <td class="text-center px-4 py-3 font-semibold text-primary">{{ row.csMember }}</td>
+              <td class="text-center px-4 py-3 font-medium">{{ row.ieeeMember }}</td>
+              <td class="text-center px-4 py-3 text-muted-foreground">{{ row.nonMember }}</td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
     </div>
 
-    <!-- Additional Info -->
-    <div class="text-center mt-8">
-      <div class="bg-muted/50 rounded-lg p-4 max-w-3xl mx-auto">
-        <p class="text-sm text-muted-foreground">
-          <strong>Membership Verification:</strong> Valid IEEE/CS membership required for discounted rates.
-          <strong>Student Status:</strong> Valid student ID required.
-          <strong>Scholarships:</strong> Apply through the scholarship program — open April 20th, 2026.
-        </p>
-      </div>
+    <!-- CTA -->
+    <div class="text-center mt-8 space-y-3">
+      <p class="text-sm text-muted-foreground">
+        <strong>Membership Verification:</strong> Valid IEEE/CS membership required for discounted rates.
+        <strong>Student Status:</strong> Valid student ID required.
+      </p>
+      <a
+        href="#registration"
+        class="inline-flex items-center px-8 py-3 bg-gradient-to-r from-[#D247BF] to-primary text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
+      >
+        Register Now
+      </a>
     </div>
   </section>
 </template>

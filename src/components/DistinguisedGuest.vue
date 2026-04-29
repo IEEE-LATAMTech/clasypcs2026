@@ -32,7 +32,7 @@ const guestsList: GuestProps[] = [
     name: "Grace A Lewis",
     title: "Computer Society President Elect",
     company: "",
-    specialty: "Principal Researcher at Software Engineering Institute ",
+    specialty: "Principal Researcher at Software Engineering Institute",
     bio: "",
     socialNetworks: [
       {
@@ -46,7 +46,7 @@ const guestsList: GuestProps[] = [
     name: "Andrew Seely",
     title: "Information Technology and Cybersecurity Consultant",
     company: "",
-    specialty: "Experienced educator, leader, manager, engineer, and author, with 30 years of progressive accomplishment. ",
+    specialty: "Experienced educator, leader, manager, engineer, and author, with 30 years of progressive accomplishment.",
     bio: "",
     socialNetworks: [
       {
@@ -60,12 +60,40 @@ const guestsList: GuestProps[] = [
     name: "Eric Berkowitz",
     title: "Senior Membership Marketing Leader",
     company: "",
-    specialty: "Strategy, Tactics, Execution, CX and Community Building ",
+    specialty: "Strategy, Tactics, Execution, CX and Community Building",
     bio: "",
     socialNetworks: [
       {
         name: "LinkedIn",
         url: "https://www.linkedin.com/in/ericberkowitz/",
+      },
+    ],
+  },
+  {
+    imageUrl: "/imagenesTeam/waldir.jpeg",
+    name: "Waldir Ventura",
+    title: "IEEE Region 9 Advisor",
+    company: "",
+    specialty: "Advisor for IEEE Region 9 Student & Young Professional activities",
+    bio: "",
+    socialNetworks: [
+      {
+        name: "LinkedIn",
+        url: "https://www.linkedin.com/in/waldirventura/",
+      },
+    ],
+  },
+  {
+    imageUrl: "/imagenesTeam/placeholder.jpg",
+    name: "Bishwarup Ray",
+    title: "Distinguished Guest",
+    company: "",
+    specialty: "IEEE Computer Society leader and advocate for student and young professional development",
+    bio: "",
+    socialNetworks: [
+      {
+        name: "LinkedIn",
+        url: "https://www.linkedin.com/in/bishwarup-ray/",
       },
     ],
   },
