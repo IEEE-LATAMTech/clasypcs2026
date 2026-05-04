@@ -28,10 +28,9 @@ import { Separator } from "@/components/ui/separator";
 import { ChevronsDown, Menu, ChevronDown } from "lucide-vue-next";
 import ToggleTheme from "./ToggleTheme.vue";
 
-interface RouteProps {
-  href: string;
-  label: string;
-}
+type MainNavEntry =
+  | { kind: "hash"; href: string; label: string }
+  | { kind: "route"; to: string; label: string };
 
 interface PreviousEdition {
   href: string;
@@ -39,28 +38,18 @@ interface PreviousEdition {
   location: string;
 }
 
-const mainRoutes: RouteProps[] = [
-  {
-    href: "#pricing",
-    label: "Pricing",
-  },
-  {
-    href: "#services",
-    label: "Location",
-  },
-  {
-    href: "#team",
-    label: "Team",
-  },
-  {
-    href: "#faq",
-    label: "FAQ",
-  },
-  {
-    href: "#registration",
-    label: "Register",
-  },
+const mainRoutes: MainNavEntry[] = [
+  { kind: "hash", href: "#pricing", label: "Pricing" },
+  { kind: "hash", href: "#services", label: "Location" },
+  { kind: "hash", href: "#team", label: "Team" },
+  { kind: "hash", href: "#faq", label: "FAQ" },
+  { kind: "hash", href: "#registration", label: "Register" },
+  { kind: "route", to: "/hackathon", label: "Hackathon" },
 ];
+
+function hashHomeHref(hash: string) {
+  return `/${hash}`;
+}
 
 const previousEditions: PreviousEdition[] = [
   {
@@ -124,20 +113,31 @@ const isMobilePrevOpen = ref<boolean>(false);
             </SheetHeader>
 
             <div class="flex flex-col gap-2">
-              <Button
-                v-for="{ href, label } in mainRoutes"
-                :key="label"
-                as-child
-                variant="ghost"
-                class="justify-start text-base"
-              >
-                <a
-                  @click="isOpen = false"
-                  :href="href"
+              <template v-for="item in mainRoutes" :key="item.label">
+                <Button
+                  v-if="item.kind === 'route'"
+                  as-child
+                  variant="ghost"
+                  class="justify-start text-base"
                 >
-                  {{ label }}
-                </a>
-              </Button>
+                  <router-link :to="item.to" @click="isOpen = false">
+                    {{ item.label }}
+                  </router-link>
+                </Button>
+                <Button
+                  v-else
+                  as-child
+                  variant="ghost"
+                  class="justify-start text-base"
+                >
+                  <a
+                    @click="isOpen = false"
+                    :href="hashHomeHref(item.href)"
+                  >
+                    {{ item.label }}
+                  </a>
+                </Button>
+              </template>
 
               <!-- Previous Editions accordion for mobile -->
               <div>
@@ -178,8 +178,8 @@ const isMobilePrevOpen = ref<boolean>(false);
     <NavigationMenu class="hidden lg:block">
       <NavigationMenuList>
         <NavigationMenuItem
-          v-for="{ href, label } in mainRoutes"
-          :key="label"
+          v-for="item in mainRoutes"
+          :key="item.label"
         >
           <NavigationMenuLink asChild>
             <Button
@@ -187,7 +187,10 @@ const isMobilePrevOpen = ref<boolean>(false);
               variant="ghost"
               class="justify-start text-base"
             >
-              <a :href="href">{{ label }}</a>
+              <router-link v-if="item.kind === 'route'" :to="item.to">
+                {{ item.label }}
+              </router-link>
+              <a v-else :href="hashHomeHref(item.href)">{{ item.label }}</a>
             </Button>
           </NavigationMenuLink>
         </NavigationMenuItem>
