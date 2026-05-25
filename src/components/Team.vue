@@ -43,14 +43,14 @@ const teamList: TeamProps[] = [
   {
     imageUrl: "/imagenesTeam/Ariana.png",
     firstName: "Ariana",
-    lastName: "Garcia",
+    lastName: "García",
     positions: ["Finance Coordinator"],
     socialNetworks: [],
   },
   {
     imageUrl: "/imagenesTeam/Esteban_Arias-Méndez.jpeg",
     firstName: "Esteban",
-    lastName: "Arias",
+    lastName: "Arias Méndez",
     positions: ["Logistics Coordinator"],
     socialNetworks: [],
   },

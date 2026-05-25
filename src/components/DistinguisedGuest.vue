@@ -28,9 +28,9 @@ interface SocialNetworkProps {
 
 const guestsList: GuestProps[] = [
   {
-    imageUrl: "/imagenesSpeakers/grace.PNG",
+    imageUrl: "/imagenesSpeakers/grace2.webp",
     name: "Grace A Lewis",
-    title: "Computer Society President Elect",
+    title: "Computer Society President 2026",
     company: "",
     specialty: "Principal Researcher at Software Engineering Institute",
     bio: "",
@@ -42,7 +42,7 @@ const guestsList: GuestProps[] = [
     ],
   },
   {
-    imageUrl: "/imagenesSpeakers/andrew.png",
+    imageUrl: "/imagenesSpeakers/andrew2.jpg",
     name: "Andrew Seely",
     title: "Information Technology and Cybersecurity Consultant",
     company: "",
@@ -56,7 +56,7 @@ const guestsList: GuestProps[] = [
     ],
   },
   {
-    imageUrl: "/imagenesSpeakers/eric.png",
+    imageUrl: "/imagenesSpeakers/eric3.jpg",
     name: "Eric Berkowitz",
     title: "Senior Membership Marketing Leader",
     company: "",
@@ -84,16 +84,16 @@ const guestsList: GuestProps[] = [
     ],
   },
   {
-    imageUrl: "/imagenesTeam/placeholder.jpg",
-    name: "Bishwarup Ray",
-    title: "Distinguished Guest",
+    imageUrl: "/imagenesSpeakers/biswarup.jpg",
+    name: "Biswarup Ray",
+    title: "Chair of IEEE Computer Society SYP 2026",
     company: "",
-    specialty: "IEEE Computer Society leader and advocate for student and young professional development",
+    specialty: "Computer Society SYP Chair. Senior AI Engineering at ZS",
     bio: "",
     socialNetworks: [
       {
         name: "LinkedIn",
-        url: "https://www.linkedin.com/in/bishwarup-ray/",
+        url: "https://www.linkedin.com/in/biswarup-ray/",
       },
     ],
   },
@@ -166,14 +166,14 @@ const getIconColor = (socialName: string) => {
       >
         <CardHeader class="text-center pb-4">
           <div class="mx-auto mb-4 relative">
-            <div class="w-24 h-24 mx-auto rounded-full overflow-hidden border-4 border-gradient-to-r from-[#D247BF] to-primary p-[3px] bg-gradient-to-r from-[#D247BF] to-primary">
+            <div class="w-32 h-32 mx-auto rounded-full overflow-hidden p-[3px] bg-gradient-to-r from-[#D247BF] to-primary">
               <img
                 :src="imageUrl"
                 :alt="name"
-                class="w-full h-full object-cover rounded-full bg-background"
+                class="w-full h-full object-cover object-top rounded-full bg-background"
               />
             </div>
-            <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-background flex items-center justify-center">
+            <div class="absolute bottom-0 right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-background flex items-center justify-center">
               <div class="w-2 h-2 bg-white rounded-full"></div>
             </div>
           </div>

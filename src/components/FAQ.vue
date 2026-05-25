@@ -14,7 +14,7 @@ interface FAQProps {
 
 const FAQList: FAQProps[] = [
   {
-    question: "Will there be networking opportunities??",
+    question: "Will there be networking opportunities?",
     answer:
       "Absolutely! The event is built around collaboration. ",
     value: "item-2",
