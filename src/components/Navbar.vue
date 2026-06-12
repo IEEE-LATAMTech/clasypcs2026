@@ -1,10 +1,6 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 
-import { useColorMode } from "@vueuse/core";
-const mode = useColorMode();
-mode.value = "dark";
-
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -26,7 +22,6 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
 import { ChevronsDown, Menu, ChevronDown } from "lucide-vue-next";
-import ToggleTheme from "./ToggleTheme.vue";
 
 interface RouteProps {
   href: string;
@@ -76,11 +71,7 @@ const isMobilePrevOpen = ref<boolean>(false);
 
 <template>
   <header
-    :class="{
-      'shadow-light': mode === 'light',
-      'shadow-dark': mode === 'dark',
-      'w-[90%] md:w-[70%] lg:w-[75%] lg:max-w-screen-xl top-5 mx-auto sticky border z-40 rounded-2xl flex justify-between items-center p-2 bg-card shadow-md': true,
-    }"
+    class="shadow-dark w-[90%] md:w-[70%] lg:w-[75%] lg:max-w-screen-xl top-5 mx-auto sticky border z-40 rounded-2xl flex justify-between items-center p-2 bg-card shadow-md"
   >
     <router-link
       to="/"
@@ -168,7 +159,6 @@ const isMobilePrevOpen = ref<boolean>(false);
 
           <SheetFooter class="flex-col sm:flex-col justify-start items-start">
             <Separator class="mb-2" />
-            <ToggleTheme />
           </SheetFooter>
         </SheetContent>
       </Sheet>
@@ -221,9 +211,6 @@ const isMobilePrevOpen = ref<boolean>(false);
       </NavigationMenuList>
     </NavigationMenu>
 
-    <div class="hidden lg:flex">
-      <ToggleTheme />
-    </div>
   </header>
 </template>
 
