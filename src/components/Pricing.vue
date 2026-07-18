@@ -24,9 +24,9 @@ const rows: PricingRow[] = [
 ];
 
 const deadlines = [
-  { label: "Early Bird", period: "Until July 15", color: "bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20" },
-  { label: "Regular", period: "July 15 – July 31", color: "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20" },
-  { label: "Late", period: "August 1 – August 21", color: "bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20" },
+  { label: "Early Bird", period: "Until July 26", color: "bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20" },
+  { label: "Regular", period: "July 26 – August 09", color: "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20" },
+  { label: "Late", period: "August 10 – August 21", color: "bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20" },
 ];
 
 const phaseLabel: Record<string, string> = {
