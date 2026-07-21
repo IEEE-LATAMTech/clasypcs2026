@@ -43,8 +43,16 @@ import Separator from "./ui/separator/Separator.vue";
         <div class="flex flex-col gap-2">
           <h3 class="font-bold text-lg">Help</h3>
           <div>
+            <router-link
+              to="/hackathon"
+              class="opacity-60 hover:opacity-100"
+            >
+              Hackathon
+            </router-link>
+          </div>
+          <div>
             <a
-              href="#registration"
+              href="/#registration"
               class="opacity-60 hover:opacity-100"
             >
               Contact Us
@@ -53,7 +61,7 @@ import Separator from "./ui/separator/Separator.vue";
 
           <div>
             <a
-              href="#faq"
+              href="/#faq"
               class="opacity-60 hover:opacity-100"
             >
               FAQ
